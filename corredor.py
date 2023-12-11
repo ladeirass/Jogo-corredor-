@@ -14,10 +14,12 @@ def obstaculos_movimento(obstaculo_list):
         for obstaculo_rect  in obstaculo_list:
             obstaculo_rect.x -= 5
 
-            screen.blit(caracol_superf,obstaculo_rect)
-        
+            if obstaculo_rect.bottom == 300: screen.blit(caracol_superf,obstaculo_rect)
+            else:screen.blit(mosca_superf, obstaculo_rect) 
+                
         obstaculo_list = [obstaculo for obstaculo in obstaculo_list if obstaculo.x > - 100]    
-            
+
+        return obstaculo_list
     else: return []     
         
 pygame.init()

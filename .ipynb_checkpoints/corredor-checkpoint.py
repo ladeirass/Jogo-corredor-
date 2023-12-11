@@ -14,10 +14,10 @@ def obstaculos_movimento(obstaculo_list):
         for obstaculo_rect  in obstaculo_list:
             obstaculo_rect.x -= 5
 
-            if obstaculo_rect.bottom == 300:
-                screen.blit(caracol_superf, obstaculo_rect)
-            else:
-                screen.blit()
+            if obstaculo_rect.bottom == 300: screen.blit(caracol_superf,obstaculo_rect)
+            else:screen.blit(mosca_superf, obstaculo_rect) 
+                
+        obstaculo_list = [obstaculo for obstaculo in obstaculo_list if obstaculo.x > - 100]    
 
         return obstaculo_list
     else: return []     
@@ -40,9 +40,8 @@ score_rect = score_superf.get_rect(center = (400, 50))
 
 #.convert, converte a imagem em um arquivo facilitado para execução em python
 #Obstaculos
-caracol_superf = pygame.image.load('graphics/snail/snail1.png').convert_alpha( )
-caracol_retangulo = caracol_superf.get_rect(bottomright = (600,300 ) )
-
+caracol_superf = pygame.image.load('graphics/snail/snail1.png').convert_alpha()
+mosca_superf = pygame.image.load('graphics/Fly/Fly1.png').convert_alpha()
 
 obstaculo_rect_list = []
 
@@ -84,15 +83,13 @@ while True:
         else:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 game_active = True
-                
                 ini_tempo = int (pygame.time.get_ticks() / 1000)
 
         if event.type == tempo_obstaculos and game_active:
             if randint(0,2): 
                 obstaculo_rect_list.append(caracol_superf.get_rect(bottomright = (randint(900,1100),300 )))
-        else:
-            obstaculo_rect_list.append(caracol_superf.get_rect(bottomright = (randint(900,1100),210 )))
-            
+            else:
+                obstaculo_rect_list.append(mosca_superf.get_rect(bottomright = (randint(900,1100),210 )))
 
     # blit significa tranfêrencia de imagem em bloco
     # foi passado dois argumentos o primeiro referente a tela e o outro a posição.)
